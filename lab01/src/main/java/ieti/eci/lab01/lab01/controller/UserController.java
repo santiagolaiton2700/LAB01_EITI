@@ -30,7 +30,7 @@ public class UserController {
         }
     }
     @RequestMapping(method = RequestMethod.GET,path = {"/{id}"})
-    public ResponseEntity<User>findById(@PathVariable("id") UUID id){
+    public ResponseEntity<User>findById(@PathVariable("id") String id){
         try{
             return new ResponseEntity<>(userService.findById(id),HttpStatus.CREATED);
         }catch (Exception ex){
