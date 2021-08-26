@@ -17,12 +17,10 @@ public class UserServiceHashMap implements UserService {
         users.put(user.getId(),user);
         return user;
     }
-
     @Override
     public User findById(String id) {
         return users.get(id);
     }
-
     @Override
     public List<User> all() {
         List<User> userList = new ArrayList<>();
@@ -31,14 +29,13 @@ public class UserServiceHashMap implements UserService {
         }
         return userList;
     }
-
     @Override
     public void deleteById(String id) {
         users.remove(id);
     }
-
     @Override
     public User update(User user, String userId) {
+        System.out.println(userId+""+userId);
         users.put(userId,user);
         return user;
     }

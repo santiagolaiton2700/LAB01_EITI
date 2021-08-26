@@ -47,24 +47,27 @@ public class UserController {
             return new ResponseEntity("No se encontraron usuarios",HttpStatus.NOT_FOUND);
         }
     }
-    @RequestMapping(method = RequestMethod.PUT,path = {"/id"})
-    public ResponseEntity<User>update(@RequestBody UserDto userDto,@PathVariable("id")String id ){
+
+    @RequestMapping(method = RequestMethod.PUT,path = {"/{id}"})
+    public ResponseEntity<User> update( @RequestBody UserDto userDto, @PathVariable String id )
+    {
         try{
             userService.update(new User(id,userDto.getName(),userDto.getEmail(),userDto.getLastName(),LocalDateTime.now()),id);
-            return new ResponseEntity(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (Exception ex){
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE,null,ex);
             return new ResponseEntity("No se a podido actulizar el usuario",HttpStatus.NOT_FOUND);
         }
     }
-    @RequestMapping(method = RequestMethod.DELETE,path = {"/id"})
-    public ResponseEntity<User>update(@PathVariable("id")String id ){
-        try{
+    @RequestMapping(method = RequestMethod.DELETE,path = {"/{id}"})
+    public ResponseEntity<Boolean> delete( @PathVariable String id )
+    {
+        try {
             userService.deleteById(id);
-            return new ResponseEntity(HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (Exception ex){
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE,null,ex);
-            return new ResponseEntity("No se a podido eliminar el usuario",HttpStatus.NOT_FOUND);
+            return new ResponseEntity("No se a podido borrar el usuario",HttpStatus.NOT_FOUND);
         }
     }
 
